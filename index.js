@@ -13,7 +13,7 @@ app.use(express.json());
 const userRoutes = require("./routes/users");
 const listingRoutes = require("./routes/listings");
 
-app.use("/api/users", userRoutes);
+app.use("/users", userRoutes);
 app.use("/listings", listingRoutes);
 
 
