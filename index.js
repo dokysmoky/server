@@ -12,7 +12,9 @@ app.use(express.json());
 // Import routes
 const userRoutes = require("./routes/users");
 const listingRoutes = require("./routes/listings");
+const commentRoutes = require("./routes/commentRoutes");
 
+app.use("/comments", commentRoutes);
 app.use("/users", userRoutes);
 app.use("/listings", listingRoutes);
 
