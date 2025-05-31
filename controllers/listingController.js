@@ -1,21 +1,24 @@
 // server/controllers/listingController.js
 const db = require("../db");
 
+// Get all listings
 exports.getAllListings = (req, res) => {
-  db.query("SELECT * FROM listings", (err, results) => {
+  db.query("SELECT * FROM listing", (err, results) => {
     if (err) return res.status(500).json({ error: err });
     res.json(results);
   });
 };
 
+// Create a new listing
 exports.createListing = (req, res) => {
-  const { title, description, price, seller_id } = req.body;
-  db.query(
-    "INSERT INTO listings (title, description, price, seller_id) VALUES (?, ?, ?, ?)",
-    [title, description, price, seller_id],
-    (err, result) => {
-      if (err) return res.status(500).json({ error: err });
-      res.status(201).json({ message: "Listing created", id: result.insertId });
-    }
-  );
+  const { listing_name, description, condition, price, user_id, photo } = req.body;
+
+  const sql = `INSERT INTO listing 
+    (listing_name, description, \`condition\`, price, user_id, photo) 
+    VALUES (?, ?, ?, ?, ?, ?)`;
+
+  db.query(sql, [listing_name, description, condition, price, user_id, photo], (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+    res.status(201).json({ message: "Listing created", id: result.insertId });
+  });
 };

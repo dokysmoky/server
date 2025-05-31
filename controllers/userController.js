@@ -2,7 +2,7 @@
 const db = require("../db");
 
 exports.getAllUsers = (req, res) => {
-  db.query("SELECT * FROM users", (err, results) => {
+  db.query("SELECT * FROM user", (err, results) => {
     if (err) return res.status(500).json({ error: err });
     res.json(results);
   });
@@ -11,7 +11,7 @@ exports.getAllUsers = (req, res) => {
 exports.registerUser = (req, res) => {
   const { username, email, password } = req.body;
   db.query(
-    "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+    "INSERT INTO user (username, email, password) VALUES (?, ?, ?)",
     [username, email, password],
     (err, result) => {
       if (err) return res.status(500).json({ error: err });
