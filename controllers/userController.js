@@ -36,7 +36,7 @@ exports.loginUser = (req, res) => {
   const { email, password } = req.body;
 
   db.query(
-    "SELECT * FROM user WHERE email = ? AND password = ?",
+    `SELECT * FROM user WHERE email = ? AND password = ?`,
     [email, password],
     (err, results) => {
       if (err) return res.status(500).json({ error: err.sqlMessage });

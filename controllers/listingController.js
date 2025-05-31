@@ -11,9 +11,7 @@ exports.getAllListings = (req, res) => {
 
 // Create a new listing
 exports.createListing = (req, res) => {
-  const { listing_name, description, condition, price, user_id, photo } = req.body;
-
-  const sql = `INSERT INTO listing 
+    const sql = `INSERT INTO listing 
     (listing_name, description, \`condition\`, price, user_id, photo) 
     VALUES (?, ?, ?, ?, ?, ?)`;
 

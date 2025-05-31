@@ -13,6 +13,8 @@ app.use(express.json());
 const userRoutes = require("./routes/users");
 const listingRoutes = require("./routes/listings");
 const commentRoutes = require("./routes/commentRoutes");
+const wishlistRoutes = require("./routes/wishlist");
+app.use("/wishlist", wishlistRoutes);
 
 app.use("/comments", commentRoutes);
 app.use("/users", userRoutes);
