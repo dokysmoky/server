@@ -16,15 +16,20 @@ exports.getWishlist = (req, res) => {
   });
 };
 
-//  Add item to wishlist
 exports.addToWishlist = (req, res) => {
   const { user_id, product_id } = req.body;
 
   const sql = `INSERT IGNORE INTO wishlist (user_id, product_id) VALUES (?, ?)`;
 
-  db.query(sql, [user_id, product_id], (err) => {
+  db.query(sql, [user_id, product_id], (err, result) => {
     if (err) return res.status(500).json({ error: err.sqlMessage });
-    res.status(201).json({ message: "Added to wishlist" });
+
+    // result.affectedRows === 1 => added, 0 => already existed
+    if (result.affectedRows === 0) {
+      res.status(200).json({ message: "Item already in wishlist", alreadyExists: true });
+    } else {
+      res.status(201).json({ message: "Added to wishlist", alreadyExists: false });
+    }
   });
 };
 
