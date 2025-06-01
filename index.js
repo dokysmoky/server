@@ -14,12 +14,13 @@ const userRoutes = require("./routes/users");
 const listingRoutes = require("./routes/listings");
 const commentRoutes = require("./routes/commentRoutes");
 const wishlistRoutes = require("./routes/wishlist");
-app.use("/wishlist", wishlistRoutes);
+const cartRoutes= require("./routes/cart");
 
+app.use("/cart", cartRoutes); 
 app.use("/comments", commentRoutes);
 app.use("/users", userRoutes);
 app.use("/listings", listingRoutes);
-
+app.use("/wishlist", wishlistRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

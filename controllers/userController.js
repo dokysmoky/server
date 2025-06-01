@@ -1,4 +1,5 @@
 // server/controllers/userController.js
+
 const db = require("../db");
 
 // Get all users
