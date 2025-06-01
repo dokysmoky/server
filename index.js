@@ -15,7 +15,9 @@ const listingRoutes = require("./routes/listings");
 const commentRoutes = require("./routes/commentRoutes");
 const wishlistRoutes = require("./routes/wishlist");
 const cartRoutes= require("./routes/cart");
+const reportRoutes = require("./routes/report");
 
+app.use("/report", reportRoutes);
 app.use("/cart", cartRoutes); 
 app.use("/comments", commentRoutes);
 app.use("/users", userRoutes);
