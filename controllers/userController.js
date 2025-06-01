@@ -50,3 +50,27 @@ exports.loginUser = (req, res) => {
     }
   );
 };
+
+// Update a user's profile
+exports.updateUser = (req, res) => {
+  const { id } = req.params;
+  const { bio, address, profilePicture } = req.body;
+
+  db.query(
+    "UPDATE user SET bio = ?, address = ?, profile_picture = ? WHERE user_id = ?",
+    [bio, address, profilePicture, id],
+    (err) => {
+      if (err) {
+        console.error("Update error", err);
+        return res.status(500).json({ error: "Database update failed" });
+      }
+
+      db.query("SELECT * FROM user WHERE user_id = ?", [id], (err2, results) => {
+        if (err2) return res.status(500).json({ error: "Failed to fetch updated user" });
+
+        const { password, ...userWithoutPassword } = results[0];
+        res.json(userWithoutPassword);
+      });
+    }
+  );
+};
